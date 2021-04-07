@@ -1,13 +1,13 @@
 import { QueueOptions } from './QueueOptions';
-import { createQueue as createUploadQueue } from './uploadQueue';
+import { createQueue as createPushSensorReadingQueue } from './pushSensorReadingQueue';
 import { Queue } from 'bull';
 
 interface Workers {
-  uploadQueue: Queue
+  pushSensorReadingQueue: Queue
 }
 
 export function createQueues(options: QueueOptions): Workers {
   return {
-    uploadQueue: createUploadQueue(options)
+    pushSensorReadingQueue: createPushSensorReadingQueue(options)
   }
 }

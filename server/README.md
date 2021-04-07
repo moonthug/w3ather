@@ -1,6 +1,1 @@
-# 🎰c0mmander/server
-
-
-## todo
-
-- Move to Kubeless/Openwhisk etc.
+# @h0me/w3ather-sensor-server

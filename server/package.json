@@ -1,10 +1,10 @@
 {
-  "name": "@h0me/w3ather-server",
+  "name": "@h0me/w3ather-sensor-server",
   "version": "0.1.0",
   "description": "",
   "main": "dist/index.js",
   "bin": {
-    "w3ather-server": "./bin/w3ather-server"
+    "w3ather-server": "./bin/w3ather-sensor-server"
   },
   "directories": {
     "src": "src",
@@ -16,8 +16,8 @@
   "scripts": {
     "prebuild": "rm -rf ./dist",
     "build": "tsc",
-    "build:docker": "DOCKER_BUILDKIT=0 docker build -t polygl0t/c0mmander:latest .",
-    "build:docker:push": "docker push polygl0t/c0mmander:latest",
+    "build:docker": "DOCKER_BUILDKIT=0 docker build -t polygl0t/w3ather-sensor-server:latest .",
+    "build:docker:push": "docker push polygl0t/w3ather-sensor-server:latest",
     "start": "node dist/index.js",
     "start:debug": "ts-node src/index.ts",
     "lint": "eslint . --ext .ts",
@@ -40,6 +40,7 @@
     "@types/dotenv": "^8.2.0",
     "@types/koa": "^2.13.1",
     "@types/koa-bodyparser": "^4.3.0",
+    "@types/koa-pino-logger": "^3.0.0",
     "@types/koa-router": "^7.4.1",
     "@types/node": "^14.14.27",
     "@typescript-eslint/eslint-plugin": "^4.15.0",
@@ -56,7 +57,9 @@
     "joi": "^17.4.0",
     "koa": "^2.13.1",
     "koa-bodyparser": "^4.3.0",
+    "koa-pino-logger": "^3.0.0",
     "koa-router": "^10.0.0",
-    "mongoose": "^5.12.3"
+    "mongoose": "^5.12.3",
+    "pino": "^6.11.2"
   }
 }

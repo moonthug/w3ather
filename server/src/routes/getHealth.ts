@@ -1,13 +1,15 @@
-import { Middleware } from 'koa';
+import { Next, ParameterizedContext } from 'koa';
 import { AppContext } from '../app';
+import { IRouterParamContext } from 'koa-router';
 
 interface Response {
   uploadQueueComplete: number
 }
 
-export const getHealthMiddleware: Middleware<AppContext> = async (ctx, next) => {
+export async function getHealthMiddleware(ctx: ParameterizedContext<any, IRouterParamContext & AppContext>, next: Next) {
   ctx.body = {
-    uploadQueueComplete: await ctx.uploadQueue.getCompletedCount()
+    pushSensorReadingQueueCompleteCount: await ctx.pushSensorReadingQueue.getCompletedCount(),
+    pushSensorReadingQueueFailedCount: await ctx.pushSensorReadingQueue.getFailedCount()
   }
   return next();
 };
