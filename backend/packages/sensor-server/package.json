@@ -1,0 +1,60 @@
+{
+  "name": "@h0me/w3ather-sensor-server",
+  "version": "0.1.0",
+  "description": "",
+  "main": "dist/index.js",
+  "private": true,
+  "bin": {
+    "w3ather-server": "./bin/w3ather-sensor-server"
+  },
+  "directories": {
+    "src": "src",
+    "bin": "bin"
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "prebuild": "rm -rf ./dist",
+    "build": "tsc",
+    "build:docker": "DOCKER_BUILDKIT=0 docker build -t polygl0t/w3ather-sensor-server:latest .",
+    "build:docker:push": "docker push polygl0t/w3ather-sensor-server:latest",
+    "start": "node dist/index.js",
+    "start:debug": "ts-node src/index.ts",
+    "lint": "eslint . --ext .ts",
+    "lint:fix": "eslint . --ext .ts --fix",
+    "test": "mocha -r ts-node/register src/**/*.test.ts",
+    "coverage": "nyc -r lcov -e .ts -x \"*.test.ts\" npm run test",
+    "watch": "tsc --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/moonthug/tp-server.git"
+  },
+  "author": "Alex Coulcher <alex@polyglot.rodeo> (http://polyglot.rodeo/)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/moonthug/tp-server/issues"
+  },
+  "homepage": "https://github.com/moonthug/tp-server#readme",
+  "devDependencies": {
+    "@types/dotenv": "^8.2.0",
+    "@types/koa": "^2.13.1",
+    "@types/koa-bodyparser": "^4.3.0",
+    "@types/koa-pino-logger": "^3.0.0",
+    "@types/koa-router": "^7.4.1"
+  },
+  "dependencies": {
+    "@types/bull": "^3.15.0",
+    "bull": "^3.22.0",
+    "dotenv": "^8.2.0",
+    "http-status-codes": "^2.1.4",
+    "joi": "^17.4.0",
+    "koa": "^2.13.1",
+    "koa-bodyparser": "^4.3.0",
+    "koa-pino-logger": "^3.0.0",
+    "koa-router": "^10.0.0",
+    "mongoose": "^5.12.3",
+    "pino": "^6.11.2"
+  }
+}
