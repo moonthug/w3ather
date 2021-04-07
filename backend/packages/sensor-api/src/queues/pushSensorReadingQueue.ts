@@ -1,7 +1,7 @@
 import Bull, { DoneCallback, Job } from 'bull';
+import { sensorReadingModel } from '@h0me/w3ather-db';
 import { QueueOptions } from './QueueOptions';
 import { SensorReadingData } from '../handler/createSensorReading';
-import { sensorReadingModel } from '../models/sensorReading';
 
 interface PushSensorReadingJobData {
   sensorReading: SensorReadingData

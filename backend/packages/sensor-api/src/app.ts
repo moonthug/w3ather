@@ -16,13 +16,10 @@ export interface AppContext extends Koa.Context {
 export interface AppState extends Koa.DefaultState {
 }
 
-interface CreateAppOptions {
-}
-
 export function createApp() {
   const app = new Koa<AppState, AppContext>();
 
-  app.use(logger({ name: 'w3ather-sensor-server-http' }));
+  app.use(logger({ name: 'w3ather-sensor-api-http' }));
 
   // Generic error handling middleware.
   app.use(async (ctx: Koa.Context, next: () => Promise<any>) => {
