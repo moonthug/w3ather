@@ -10,6 +10,7 @@ import router from './routes';
 export interface AppContext extends Koa.Context {
   log: Logger;
   cronQueue: Queue;
+  pushExternalReadingQueue: Queue;
   pushSensorReadingQueue: Queue;
 }
 
