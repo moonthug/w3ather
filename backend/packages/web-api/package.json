@@ -1,6 +1,6 @@
 {
   "name": "@h0me/w3ather-web-api",
-  "version": "0.1.0",
+  "version": "0.0.1",
   "description": "",
   "main": "dist/index.js",
   "private": true,
@@ -43,7 +43,7 @@
     "serverless-plugin-typescript": "^1.1.9"
   },
   "dependencies": {
-    "@h0me/w3ather-db": "^0.1.0",
+    "@h0me/w3ather-db": "^0.0.1",
     "pino": "^6.11.2"
   }
 }
