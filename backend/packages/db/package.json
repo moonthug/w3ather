@@ -1,9 +1,12 @@
 {
   "name": "@h0me/w3ather-db",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "",
   "main": "dist/index.js",
   "private": false,
+  "publishConfig": {
+    "access": "public"
+  },
   "directories": {
     "dist": "dist"
   },
@@ -32,5 +35,5 @@
   "dependencies": {
     "mongoose": "^5.12.3"
   },
-  "gitHead": "b332b357a9aa4bb8a686adc0154612190a9d3201"
+  "gitHead": "ae33f2280f972defe4eb8fe1a9148983624511aa"
 }
