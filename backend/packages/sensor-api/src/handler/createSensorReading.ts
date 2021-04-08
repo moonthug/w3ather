@@ -1,5 +1,6 @@
-import { SensorReading } from '../models/sensorReading';
 import { Queue } from 'bull';
+
+import { SensorReading } from '@h0me/w3ather-db';
 
 export interface SensorReadingData extends Omit<SensorReading, '_id' | 'createdAt' | 'updatedAt'> {}
 

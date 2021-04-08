@@ -10,9 +10,15 @@ export type DbClient = Mongoose;
 export async function createDbClient(uri: string, logger: LoggerLike = console, connectOptions?: ConnectOptions): Promise<DbClient> {
   try {
     logger.info(`connect to ${uri}`);
+
     return connect(
       uri,
-      { useNewUrlParser: true, useUnifiedTopology: true, ...connectOptions }
+      {
+        useCreateIndex: true,
+        useFindAndModify: true,
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+        ...connectOptions }
     );
   } catch (error) {
     logger.error(error);

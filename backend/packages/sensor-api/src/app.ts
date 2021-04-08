@@ -6,19 +6,29 @@ import { StatusCodes } from 'http-status-codes';
 import { Logger } from 'pino';
 
 import router from './routes';
-import { createQueues } from './queues';
 
 export interface AppContext extends Koa.Context {
   log: Logger;
+  cronQueue: Queue;
   pushSensorReadingQueue: Queue;
 }
 
 export interface AppState extends Koa.DefaultState {
+  logger: Logger
 }
 
-export function createApp() {
+interface CreateAppOptions {
+  queues: {
+    cronQueue: Queue;
+    pushExternalReadingQueue: Queue;
+    pushSensorReadingQueue: Queue;
+  }
+}
+
+export function createApp(options: CreateAppOptions) {
   const app = new Koa<AppState, AppContext>();
 
+  // Logger middleware
   app.use(logger({ name: 'w3ather-sensor-api-http' }));
 
   // Generic error handling middleware.
@@ -38,9 +48,12 @@ export function createApp() {
     }
   });
 
-  const { pushSensorReadingQueue } = createQueues({ redisUrl: process.env.REDIS_URL, prefix: 'w3ather' });
-  app.context.pushSensorReadingQueue = pushSensorReadingQueue;
+  // Queues
+  app.context.cronQueue = options.queues.cronQueue;
+  app.context.pushExternalReadingQueue = options.queues.pushExternalReadingQueue;
+  app.context.pushSensorReadingQueue = options.queues.pushSensorReadingQueue;
 
+  // Middleware & Routes
   app.use(bodyParser())
   app.use(router.routes());
 

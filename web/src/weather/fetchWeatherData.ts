@@ -119,7 +119,6 @@ export async function fetchWeatherData() {
       {
         method: "GET",
       });
-
     data = await response.json();
   } catch (e) {
     // Log

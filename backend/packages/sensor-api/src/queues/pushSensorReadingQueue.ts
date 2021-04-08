@@ -8,12 +8,16 @@ interface PushSensorReadingJobData {
 }
 
 export function createQueue(options: QueueOptions) {
+  const { logger } = options;
+
   const queue = new Bull<PushSensorReadingJobData>('push-sensor-reading-queue', {
     redis: options.redisUrl,
     prefix: options.prefix
   });
 
   queue.process(async (job: Job<PushSensorReadingJobData>, done: DoneCallback) => {
+    logger.info({ msg: 'running job', queue: 'push-sensor-reading-queue', id: job.id, attempts: job.attemptsMade })
+
     try {
       const reading = await sensorReadingModel.create(job.data);
       return done(null, reading);

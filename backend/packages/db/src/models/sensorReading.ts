@@ -1,25 +1,25 @@
 import { Document, model, Schema } from 'mongoose';
 
 export interface SensorReading {
-  _id: string;
-  batteryPercent: number;
-  batteryVoltage: number;
-  createdAt: Date;
-  dewPoint: number;
-  externalTemp: number;
-  heatIndex: number;
-  humidity: number;
-  internalTemp: number;
-  lux: number;
-  rainfall: number;
-  recordedAt: Date;
-  solarVoltage: number;
-  updatedAt: Date;
-  uva: number;
-  uvb: number;
-  uvIndex: number;
-  windDirection: string;
-  windSpeed: number;
+  _id: string,
+  batteryPercent: number,
+  batteryVoltage: number,
+  createdAt: Date,
+  dewPoint: number,
+  externalTemp: number,
+  heatIndex: number,
+  humidity: number,
+  internalTemp: number,
+  lux: number,
+  rainfall: number,
+  recordedAt: Date,
+  solarVoltage: number,
+  updatedAt: Date,
+  uva: number,
+  uvb: number,
+  uvIndex: number,
+  windDirection: string,
+  windSpeed: number
 }
 
 export type SensorReadingModel = SensorReading & Document;
@@ -27,7 +27,6 @@ export type SensorReadingModel = SensorReading & Document;
 const sensorReadingSchema = new Schema({
   batteryPercent: Number,
   batteryVoltage: Number,
-  createdAt: Date,
   dewPoint: Number,
   externalTemp: Number,
   heatIndex: Number,
@@ -35,9 +34,8 @@ const sensorReadingSchema = new Schema({
   internalTemp: Number,
   lux: Number,
   rainfall: Number,
-  recordedAt: { index: true, type: Date },
+  recordedAt: { index: true, unique: true, type: Date },
   solarVoltage: Number,
-  updatedAt: Date,
   uva: Number,
   uvb: Number,
   uvIndex: Number,
