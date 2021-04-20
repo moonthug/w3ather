@@ -17,8 +17,6 @@
   "scripts": {
     "prebuild": "rm -rf ./dist",
     "build": "tsc",
-    "build:docker": "DOCKER_BUILDKIT=0 docker build -t polygl0t/w3ather-web-api:latest .",
-    "build:docker:push": "docker push polygl0t/w3ather-web-api:latest",
     "start:debug": "sls offline",
     "lint": "eslint . --ext .ts",
     "lint:fix": "eslint . --ext .ts --fix",

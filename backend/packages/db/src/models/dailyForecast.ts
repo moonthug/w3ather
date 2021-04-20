@@ -6,8 +6,8 @@ export interface DailyForecast {
   updatedAt: Date,
   source: string,
   recordedAt: Date,
-  sunrise: number,
-  sunset: number,
+  sunrise: Date,
+  sunset: Date,
   temp: {
     morn: number,
     day: number,
@@ -49,8 +49,8 @@ export type DailyForecastModel = DailyForecast & Document;
 const dailyForecastSchema = new Schema({
   source: { index: true, type: String },
   recordedAt: { index: true, unique: true, type: Date },
-  sunrise: Number,
-  sunset: Number,
+  sunrise: Date,
+  sunset: Date,
   temp: {
     morn: Number,
     day: Number,
@@ -79,6 +79,7 @@ const dailyForecastSchema = new Schema({
   snowVolume: Number,
   weather: [
     {
+      _id: false,
       id: Number,
       main: String,
       description: String,

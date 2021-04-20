@@ -1,21 +1,49 @@
 import { Context, APIGatewayEvent } from 'aws-lambda';
-import pino from 'pino';
+import pino, { Logger } from 'pino';
 
-import { DbClient, sensorReadingModel } from '@h0me/w3ather-db';
+import { DbClient } from '@h0me/w3ather-db';
 
-import { response } from './helpers/response';
 import { connectToDb } from './helpers/connectToDb';
+import { getCurrentWeatherHandler } from './handlers/getCurrentWeather';
+import { getDailyWeatherForecastHandler } from './handlers/getDailyWeatherForecast';
+import { getHourlyWeatherForecastHandler } from './handlers/getHourlyWeatherForecast';
+import { getMinutelyWeatherForecastHandler } from './handlers/getMinutelyWeatherForecast';
 
 let dbClient: DbClient;
 
-export async function getCurrentWeather(event: APIGatewayEvent, context: Context) {
+async function setupDb(context: Context, logger: Logger) {
   context.callbackWaitsForEmptyEventLoop = false;
-
-  const logger = pino({ name: 'w3ather-web-api', timestamp: true, level: 'debug' });
-
   await connectToDb(dbClient, logger);
+}
 
-  const sensorReadings = await sensorReadingModel.find();
+export async function getCurrentWeather(event: APIGatewayEvent, context: Context) {
+  const logger = pino({ name: 'w3ather-web-api_getCurrentWeather', timestamp: true, level: 'debug' });
 
-  return response({ sensorReadings });
+  await setupDb(context, logger);
+
+  return getCurrentWeatherHandler(logger);
+}
+
+export async function getDailyWeatherForecast(event: APIGatewayEvent, context: Context) {
+  const logger = pino({ name: 'w3ather-web-api_getDailyWeatherForecast', timestamp: true, level: 'debug' });
+
+  await setupDb(context, logger);
+
+  return getDailyWeatherForecastHandler(logger);
+}
+
+export async function getHourlyWeatherForecast(event: APIGatewayEvent, context: Context) {
+  const logger = pino({ name: 'w3ather-web-getHourlyWeatherForecast', timestamp: true, level: 'debug' });
+
+  await setupDb(context, logger);
+
+  return getHourlyWeatherForecastHandler(logger);
+}
+
+export async function getMinutelyWeatherForecast(event: APIGatewayEvent, context: Context) {
+  const logger = pino({ name: 'w3ather-web-getMinutelyWeatherForecast', timestamp: true, level: 'debug' });
+
+  await setupDb(context, logger);
+
+  return getMinutelyWeatherForecastHandler(logger);
 }

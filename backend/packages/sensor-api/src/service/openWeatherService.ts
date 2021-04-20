@@ -153,8 +153,8 @@ export class OpenWeatherService {
         return {
           source: SOURCE,
           recordedAt: new Date(item.dt * 1000),
-          sunrise: item.sunrise,
-          sunset: item.sunset,
+          sunrise: new Date(item.sunrise * 1000),
+          sunset: new Date(item.sunset * 1000),
           temp: item.temp,
           feelsLike: item.feels_like,
           pressure: item.pressure,

@@ -51,6 +51,7 @@ const hourlyForecastSchema = new Schema({
   snowVolume: Number,
   weather: [
     {
+      _id: false,
       id: Number,
       main: String,
       description: String,
