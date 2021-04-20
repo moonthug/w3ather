@@ -5,16 +5,16 @@ A weather station, aggregator and frontend to show the weather in Branston, Leic
 
 ## Project
 
-- #### [`backend`](backend)
+- #### [`web`](web)
   - Lerna mono repo
-    - ##### [`packages/sensor-api`](backend/packages/sensor-api)
+    - ##### [`packages/web`](web/packages/web)
+      - React Frontend (create-react-app)
+    - ##### [`packages/sensor-api`](web/packages/sensor-api)
       - REST API for the weather station (Koa)
       - Scheduled weather importer (openweather)
-    - ##### [`packages/web-api`](backend/packages/web-api)
+    - ##### [`packages/web-api`](web/packages/web-api)
       - REST API for the frontend (AWS API Gateway/Lambda)
       - Serverless project
-    - ##### [`packages/db`](backend/packages/db)
-      - Shared models and connection helpers 
 
 - #### [`device`](device)
   - ##### [`w3ather`](device/w3ather)
@@ -25,5 +25,4 @@ A weather station, aggregator and frontend to show the weather in Branston, Leic
   - ##### [`parts`](device/parts)
     - 3D Printed parts
     
-- #### [`web`](web)
-  - React Frontend (create-react-app)
+

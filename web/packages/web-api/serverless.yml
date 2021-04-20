@@ -38,27 +38,25 @@ provider:
 #    - include-me-dir/**
 
 functions:
+  # HTTP
   getCurrentWeather:
     handler: src/handler.getCurrentWeather
     events:
       - http:
           path: weather/current
           method: get
-
   getDailyWeatherForecast:
     handler: src/handler.getDailyWeatherForecast
     events:
       - http:
           path: weather/forecast/daily
           method: get
-
   getHourlyWeatherForecast:
     handler: src/handler.getHourlyWeatherForecast
     events:
       - http:
           path: weather/forecast/hourly
           method: get
-
   getMinutelyWeatherForecast:
     handler: src/handler.getMinutelyWeatherForecast
     events:
