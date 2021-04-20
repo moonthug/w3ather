@@ -1,0 +1,20 @@
+export interface SensorReadingResponse {
+  batteryPercent: number,
+  batteryVoltage: number,
+  createdAt: Date,
+  dewPoint: number,
+  externalTemp: number,
+  heatIndex: number,
+  humidity: number,
+  internalTemp: number,
+  lux: number,
+  rainfall: number,
+  recordedAt: Date,
+  solarVoltage: number,
+  updatedAt: Date,
+  uva: number,
+  uvb: number,
+  uvIndex: number,
+  windDirection: string,
+  windSpeed: number
+}

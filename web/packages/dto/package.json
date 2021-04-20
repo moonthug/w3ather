@@ -1,0 +1,35 @@
+{
+  "name": "@h0me/w3ather-dto",
+  "version": "0.0.1",
+  "description": "",
+  "main": "dist/index.js",
+  "private": false,
+  "publishConfig": {
+    "access": "public"
+  },
+  "directories": {
+    "dist": "dist"
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "prebuild": "rm -rf ./dist",
+    "build": "tsc",
+    "lint": "eslint . --ext .ts",
+    "lint:fix": "eslint . --ext .ts --fix",
+    "test": "mocha -r ts-node/register src/**/*.test.ts",
+    "coverage": "nyc -r lcov -e .ts -x \"*.test.ts\" npm run test",
+    "watch": "tsc --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/moonthug/w3ather.git"
+  },
+  "author": "Alex Coulcher <alex@polyglot.rodeo> (http://polyglot.rodeo/)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/moonthug/w3ather/issues"
+  },
+  "homepage": "https://github.com/moonthug/w3ather#readme"
+}
