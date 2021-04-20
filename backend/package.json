@@ -1,6 +1,10 @@
 {
   "name": "root",
   "private": true,
+  "scripts": {
+    "build:sensor-api:docker": "DOCKER_BUILDKIT=0 docker build -t polygl0t/w3ather-sensor-api:latest -f ./build/sensor-api/Dockerfile .",
+    "deploy:sensor-api:docker": "docker push polygl0t/w3ather-sensor-api:latest"
+  },
   "devDependencies": {
     "lerna": "^4.0.0",
     "@types/node": "^14.14.27",

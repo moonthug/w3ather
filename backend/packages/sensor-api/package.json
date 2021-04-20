@@ -17,8 +17,6 @@
   "scripts": {
     "prebuild": "rm -rf ./dist",
     "build": "tsc",
-    "build:docker": "DOCKER_BUILDKIT=0 docker build -t polygl0t/w3ather-sensor-api:latest .",
-    "build:docker:push": "docker push polygl0t/w3ather-sensor-api:latest",
     "start": "node dist/index.js",
     "start:debug": "ts-node src/index.ts",
     "lint": "eslint . --ext .ts",
@@ -45,7 +43,7 @@
     "@types/koa-router": "^7.4.1"
   },
   "dependencies": {
-    "@h0me/w3ather-db": "^0.0.1",
+    "@h0me/w3ather-db": "^0.0.5",
     "@types/bull": "^3.15.0",
     "bull": "^3.22.0",
     "dotenv": "^8.2.0",
