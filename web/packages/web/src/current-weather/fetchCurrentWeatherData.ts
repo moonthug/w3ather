@@ -1,6 +1,6 @@
+import { SensorReadingResponse } from '@h0me/w3ather-dto'
 
-
-export async function fetchCurrentWeatherData() {
+export async function fetchCurrentWeatherData(): Promise<SensorReadingResponse> {
   let data;
   try {
     const response = await fetch(
@@ -14,5 +14,5 @@ export async function fetchCurrentWeatherData() {
     throw e;
   }
 
-  return data;
+  return data as SensorReadingResponse;
 }

@@ -31,5 +31,8 @@
   "bugs": {
     "url": "https://github.com/moonthug/w3ather/issues"
   },
-  "homepage": "https://github.com/moonthug/w3ather#readme"
+  "homepage": "https://github.com/moonthug/w3ather#readme",
+  "dependencies": {
+    "typescript": "^4.2.4"
+  }
 }

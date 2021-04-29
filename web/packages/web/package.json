@@ -22,6 +22,7 @@
     "sass": "^1.32.8"
   },
   "dependencies": {
+    "@h0me/w3ather-dto": "^0.0.1",
     "@testing-library/jest-dom": "^5.11.10",
     "@testing-library/react": "^11.2.6",
     "@testing-library/user-event": "^12.8.3",
@@ -54,5 +55,5 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  },
+  }
 }

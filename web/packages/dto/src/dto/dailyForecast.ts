@@ -1,4 +1,4 @@
-export interface DailyForecastResponse {
+export interface DailyForecastData {
   createdAt: Date,
   updatedAt: Date,
   source: string,
@@ -38,5 +38,9 @@ export interface DailyForecastResponse {
       description: string,
       icon: string
     }
-  ],
+  ]
+}
+
+export interface DailyForecastResponse {
+  dailyForecasts: DailyForecastData[];
 }

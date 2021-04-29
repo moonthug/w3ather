@@ -1,35 +1,36 @@
 import React from 'react';
 
-import { fetchCurrentWeatherData } from './fetchCurrentWeatherData';
+import { fetchDailyWeatherForecastData } from './fetchDailyWeatherForecastData';
+import { DailyForecastData } from '@h0me/w3ather-dto';
 
-interface WeatherState {
+interface DailyForecastState {
   loading: boolean;
-  weather?: WeatherData;
+  dailyForecasts?: DailyForecastData[];
 }
 
-export class CurrentWeather extends React.Component<any, WeatherState> {
-  state: WeatherState  = {
+export class DailyForecast extends React.Component<any, DailyForecastState> {
+  state: DailyForecastState  = {
     loading: true
   }
 
   async componentDidMount() {
     try {
-      const weather = await fetchCurrentWeatherData();
+      const { dailyForecasts } = await fetchDailyWeatherForecastData();
       this.setState({
         loading: false,
-        weather
+        dailyForecasts
       });
     } catch (e) {
     }
   }
 
   render() {
-    const { loading, weather } = this.state;
+    const { loading, dailyForecast } = this.state;
 
     return (
       <div>
         {loading && <p>Loading!</p> }
-        { weather &&
+        { dailyForecast &&
           <div>
             <p>Temp: {weather.temperature}</p>
             <p>Min Temp: {weather.temperatureMin}</p>

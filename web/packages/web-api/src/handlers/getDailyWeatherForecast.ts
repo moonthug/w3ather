@@ -1,8 +1,10 @@
 import { Logger } from 'pino';
 import { DailyForecastModel, dailyForecastModel } from '@h0me/w3ather-db';
+import { DailyForecastResponse, DailyForecastData } from '@h0me/w3ather-dto';
+
 import { response } from '../helpers/response';
 
-function reduceDailyWeatherForecast(dailyForecast: DailyForecastModel) {
+function reduceDailyWeatherForecast(dailyForecast: DailyForecastModel): DailyForecastData {
   return {
     createdAt: dailyForecast.createdAt,
     updatedAt: dailyForecast.updatedAt,
@@ -38,5 +40,5 @@ export async function getDailyWeatherForecastHandler(logger: Logger) {
     }
   });
 
-  return response({ dailyForecasts: dailyForecasts.map(reduceDailyWeatherForecast) });
+  return response<DailyForecastResponse>({ dailyForecasts });
 }
