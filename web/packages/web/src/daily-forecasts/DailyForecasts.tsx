@@ -2,14 +2,15 @@ import React from 'react';
 
 import { fetchDailyWeatherForecastData } from './fetchDailyWeatherForecastData';
 import { DailyForecastData } from '@h0me/w3ather-dto';
+import { DailyForecast } from './DailyForecast';
 
-interface DailyForecastState {
+interface DailyForecastsState {
   loading: boolean;
   dailyForecasts?: DailyForecastData[];
 }
 
-export class DailyForecast extends React.Component<any, DailyForecastState> {
-  state: DailyForecastState  = {
+export class DailyForecasts extends React.Component<any, DailyForecastsState> {
+  state: DailyForecastsState  = {
     loading: true
   }
 
@@ -25,20 +26,16 @@ export class DailyForecast extends React.Component<any, DailyForecastState> {
   }
 
   render() {
-    const { loading, dailyForecast } = this.state;
+    const { loading, dailyForecasts } = this.state;
 
     return (
       <div>
         {loading && <p>Loading!</p> }
-        { dailyForecast &&
+        { dailyForecasts &&
           <div>
-            <p>Temp: {weather.temperature}</p>
-            <p>Min Temp: {weather.temperatureMin}</p>
-            <p>Max Temp: {weather.temperatureMax}</p>
-            <p>Feels Like: {weather.feelsLike}</p>
-            <p>Pressure: {weather.pressure}</p>
-            <p>Humidity: {weather.humidity}</p>
-            <p>Visibility: {weather.visibility}</p>
+            { dailyForecasts.map((dailyForecastData, i) => {
+              return <DailyForecast key={ i } dailyForecastData={ dailyForecastData }/>;
+            }) }
           </div>
         }
       </div>

@@ -1,1 +1,0 @@
-export { DailyForecast } from './DailyForecast'

@@ -185,7 +185,7 @@ export class OpenWeatherService {
       })
 
     try {
-      return  got(
+      return got(
         `https://api.openweathermap.org/data/2.5${path}?${queryString}`,
       ).json();
     } catch (e) {

@@ -1,10 +1,11 @@
 import React from 'react';
 
 import { fetchCurrentWeatherData } from './fetchCurrentWeatherData';
+import { SensorReadingResponse } from '@h0me/w3ather-dto';
 
 interface WeatherState {
   loading: boolean;
-  weather?: WeatherData;
+  weather?: SensorReadingResponse;
 }
 
 export class CurrentWeather extends React.Component<any, WeatherState> {
@@ -30,15 +31,7 @@ export class CurrentWeather extends React.Component<any, WeatherState> {
       <div>
         {loading && <p>Loading!</p> }
         { weather &&
-          <div>
-            <p>Temp: {weather.temperature}</p>
-            <p>Min Temp: {weather.temperatureMin}</p>
-            <p>Max Temp: {weather.temperatureMax}</p>
-            <p>Feels Like: {weather.feelsLike}</p>
-            <p>Pressure: {weather.pressure}</p>
-            <p>Humidity: {weather.humidity}</p>
-            <p>Visibility: {weather.visibility}</p>
-          </div>
+          <div>Data loaded!</div>
         }
       </div>
     );

@@ -1,42 +1,26 @@
 {
-  "name": "@h0me/w3ather-web",
+  "name": "web",
   "version": "0.1.0",
   "private": true,
+  "dependencies": {
+    "@testing-library/jest-dom": "^5.12.0",
+    "@testing-library/react": "^11.2.6",
+    "@testing-library/user-event": "^12.8.3",
+    "@types/jest": "^26.0.23",
+    "@types/node": "^12.20.11",
+    "@types/react": "^17.0.4",
+    "@types/react-dom": "^17.0.3",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-scripts": "4.0.3",
+    "typescript": "^4.2.4",
+    "web-vitals": "^1.1.1"
+  },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/moonthug/w3ather.git"
-  },
-  "author": "Alex Coulcher <alex@polyglot.rodeo> (http://polyglot.rodeo/)",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/moonthug/w3ather/issues"
-  },
-  "homepage": "https://github.com/moonthug/w3ather#readme",
-  "devDependencies": {
-    "sass": "^1.32.8"
-  },
-  "dependencies": {
-    "@h0me/w3ather-dto": "^0.0.1",
-    "@testing-library/jest-dom": "^5.11.10",
-    "@testing-library/react": "^11.2.6",
-    "@testing-library/user-event": "^12.8.3",
-    "@types/jest": "^26.0.22",
-    "@types/node": "^12.20.7",
-    "@types/react": "^17.0.3",
-    "@types/react-dom": "^17.0.3",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2",
-    "react-scripts": "4.0.3",
-    "react-styled-flexboxgrid": "^3.2.1",
-    "styled-components": "^5.2.3",
-    "typescript": "^4.2.3",
-    "web-vitals": "^1.1.1"
   },
   "eslintConfig": {
     "extends": [

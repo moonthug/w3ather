@@ -18,7 +18,8 @@ export function createQueues(options: QueueOptions): Queues {
     cronQueue: createCronQueue({
       ...options,
       dependencies: new Map<string, any>([
-        ['pushExternalReadingQueue', pushExternalReadingQueue]
+        ['pushExternalReadingQueue', pushExternalReadingQueue],
+        ['logger', options.logger],
       ])
     }),
     pushExternalReadingQueue,
