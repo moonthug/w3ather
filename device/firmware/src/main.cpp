@@ -1,4 +1,5 @@
 #include <Arduino.h>
+#include <WiFi.h>
 #include <Wire.h>
 
 
@@ -11,24 +12,28 @@
 // SI1145 (UV Sensor) @ 0x60 <-- DONT USE!
 // BME680 () @ 0x76
 
-BH1750_Sensor bh1750;
-BME680_Sensor bme680;
-VEML6075_Sensor veml6075;
+BH1750_Sensor luxSensor;
+BME680_Sensor multiSensor;
+VEML6075_Sensor uvSensor;
 
 void setup() {
   Serial.begin(115200);
   while (!Serial);
-  Serial.println("Start!");
+
+  WiFi.begin(ssid, password);
+  WiFi.setHostname("dr1nker");
 
   Wire.begin();
 
-  bh1750.begin(Wire);
-  bme680.begin(Wire);
-  veml6075.begin(Wire);
+  luxSensor.begin(Wire);
+  multiSensor.begin(Wire);
+  uvSensor.begin(Wire);
 }
 
 void loop() {
-  bh1750.loop();
-  bme680.loop();
-  veml6075.loop();
+  luxSensor.loop();
+  multiSensor.loop();
+  uvSensor.loop();
+
+  delay(5000);
 }
