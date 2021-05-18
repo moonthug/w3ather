@@ -1,9 +1,5 @@
-//
-// Created by Alex Coulcher.
-//
-
-#ifndef W3ATHER_BME680_SENSOR_H
-#define W3ATHER_BME680_SENSOR_H
+#ifndef W3ATHER_MULTISENSONR_H
+#define W3ATHER_MULTISENSONR_H
 
 #include "Wire.h"
 
@@ -11,9 +7,9 @@
 
 #define SEALEVELPRESSURE_HPA (1013.25)
 
-class BME680_Sensor {
+class MultiSensor {
 private:
-  Bsec iaqSensor;
+  Bsec sensor;
 
   void checkIaqSensorStatus();
 public:
@@ -22,4 +18,4 @@ public:
 };
 
 
-#endif //W3ATHER_BME680_SENSOR_H
+#endif //W3ATHER_MULTISENSONR_H
