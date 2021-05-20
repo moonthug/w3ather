@@ -79,6 +79,7 @@ async function postReadingMiddleware(ctx: ParameterizedContext<PostReadingMiddle
     const job = await createSensorReading(pushSensorReadingQueue, sensorReading);
 
     ctx.body = { id: job.id };
+    ctx.status = 201;
 
     return next();
   } catch (error) {
