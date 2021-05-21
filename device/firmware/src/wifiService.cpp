@@ -8,12 +8,14 @@ void WifiService::begin(const char* wifiSsid, const char* wifiPassword) {
   WiFi.begin(wifiSsid, wifiPassword);
   WiFi.setHostname("w3ather");
 
-  Serial.println("main: Connect to wifi...");
+  Logger::info("Connect to Wifi...");
+
   while (WiFi.status() != WL_CONNECTED) {
-    delay(1000);
-    Serial.println("main: waiting for connection...");
+    delay(2000);
+    Logger::warn("Wifi connecting...");
   }
-  Serial.println("main: Wifi connected!");
+
+  Logger::info("Wifi connected");
 
 //  Serial.println("main: Fetch Time");
 //  configTime(0, 0, ntpServer);

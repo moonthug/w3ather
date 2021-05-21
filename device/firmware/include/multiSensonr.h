@@ -2,12 +2,13 @@
 #define W3ATHER_MULTISENSONR_H
 
 #include "Wire.h"
-
 #include "bsec.h"
+
+#include "sensor.h"
 
 #define SEALEVELPRESSURE_HPA (1013.25)
 
-class MultiSensor {
+class MultiSensor: public Sensor {
 private:
   Bsec sensor;
 

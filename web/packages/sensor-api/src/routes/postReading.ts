@@ -27,6 +27,11 @@ interface PostReadingMiddlewareCtxState {
   sensorReading: SensorReadingData;
 }
 
+interface PostReadingResponseBody {
+  test: boolean;
+}
+
+
 /**
  *
  * @param ctx
@@ -71,15 +76,17 @@ async function validationMiddleware(ctx: ParameterizedContext<PostReadingMiddlew
  * @param ctx
  * @param next
  */
-async function postReadingMiddleware(ctx: ParameterizedContext<PostReadingMiddlewareCtxState, IRouterParamContext & AppContext>, next: Next) {
+async function postReadingMiddleware(ctx: ParameterizedContext<PostReadingMiddlewareCtxState, IRouterParamContext & AppContext, PostReadingResponseBody>, next: Next) {
   try {
     const { pushSensorReadingQueue } = ctx;
     const { sensorReading } = ctx.state;
 
     const job = await createSensorReading(pushSensorReadingQueue, sensorReading);
 
-    ctx.body = { id: job.id };
-    ctx.status = 201;
+    // ctx.body = { id: job.id };
+    // ctx.status = 201;
+
+    ctx.body.test = true;
 
     return next();
   } catch (error) {

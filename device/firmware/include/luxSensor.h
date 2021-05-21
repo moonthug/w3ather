@@ -4,7 +4,9 @@
 #include "Wire.h"
 #include "BH1750.h"
 
-class LuxSensor {
+#include "sensor.h"
+
+class LuxSensor: public Sensor {
 private:
   BH1750 sensor;
 

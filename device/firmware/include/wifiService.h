@@ -3,6 +3,8 @@
 
 #include <WiFi.h>
 
+#include "logger.h"
+
 class WifiService {
 public:
   WifiService();
