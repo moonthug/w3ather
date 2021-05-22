@@ -4,19 +4,25 @@
 #include "Wire.h"
 
 struct SensorReading {
-  const char* batteryVoltage;
-  const char* externalTemp;
-  const char* humidity;
-  const char* internalTemp;
-  const char* lux;
-  const char* rainfall;
+  float batteryPercent;
+  float batteryVoltage;
+  float dewPoint;
+  float externalTemp;
+  float heatIndex;
+  float humidity;
+  float internalTemp;
+  float lux;
+  float rainfall;
   const char* recordedAt;
-  const char* solarVoltage;
-  const char* uva;
-  const char* uvb;
-  const char* uvIndex;
+  float solarVoltage;
+  float uva;
+  float uvb;
+  int uvIndex;
   const char* windDirection;
-  const char* windSpeed;
+  float windSpeed;
+
+  const char* clientName;
+  const char* clientVersion;
 };
 
 class Sensor {

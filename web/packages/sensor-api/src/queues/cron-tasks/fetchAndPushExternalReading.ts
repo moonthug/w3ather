@@ -1,10 +1,10 @@
-import { DoneCallback, Job, Queue } from 'bull';
-import { Task } from './Task';
-import { createExternalReading } from '../../handler/createExternalReading';
+import { DoneCallback, Job } from 'bull';
+import { CronTask } from './CronTask';
+import { fetchExternalReading } from '../../handler/fetchExternalReading';
 
-export const pushExternalReading: Task = {
-  name: 'pushExternalReading',
-  cron: process.env.CRON_PUSH_EXTERNAL_READING,
+export const fetchAndPushExternalReading: CronTask = {
+  name: 'fetchAndPushExternalReading',
+  cron: process.env.CRON_FETCH_EXTERNAL_READING,
   dependencies: [
     'pushExternalReadingQueue',
     'logger'
@@ -14,7 +14,7 @@ export const pushExternalReading: Task = {
     const logger = dependencies.get('logger');
 
     try {
-      await createExternalReading(pushExternalReadingQueue);
+      await fetchExternalReading(pushExternalReadingQueue);
       return done();
     } catch (e) {
       logger.error(e);

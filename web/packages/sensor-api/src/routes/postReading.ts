@@ -7,6 +7,8 @@ import { IRouterParamContext } from 'koa-router';
 const schema = joi.object({
   batteryPercent: joi.number().required(),
   batteryVoltage: joi.number().required(),
+  clientName:joi.string().required(),
+  clientVersion:joi.string().required(),
   dewPoint:joi.number().required(),
   externalTemp:joi.number().required(),
   heatIndex: joi.number().required(),
@@ -27,11 +29,6 @@ interface PostReadingMiddlewareCtxState {
   sensorReading: SensorReadingData;
 }
 
-interface PostReadingResponseBody {
-  test: boolean;
-}
-
-
 /**
  *
  * @param ctx
@@ -45,23 +42,27 @@ async function validationMiddleware(ctx: ParameterizedContext<PostReadingMiddlew
 
     if (error) throw error;
 
+    const { body } = ctx.request;
+
     ctx.state.sensorReading = {
-      batteryPercent: parseFloat(ctx.request.body.batteryPercent),
-      batteryVoltage: parseFloat(ctx.request.body.batteryVoltage),
-      dewPoint: parseFloat(ctx.request.body.dewPoint),
-      externalTemp: parseFloat(ctx.request.body.externalTemp),
-      heatIndex: parseFloat(ctx.request.body.heatIndex),
-      humidity: parseFloat(ctx.request.body.humidity),
-      internalTemp: parseFloat(ctx.request.body.internalTemp),
-      lux: parseFloat(ctx.request.body.lux),
-      rainfall: parseFloat(ctx.request.body.rainfall),
-      recordedAt: new Date(ctx.request.body.recordedAt),
-      solarVoltage: parseFloat(ctx.request.body.solarVoltage),
-      uva: parseFloat(ctx.request.body.uva),
-      uvb: parseFloat(ctx.request.body.uvb),
-      uvIndex: parseFloat(ctx.request.body.uvIndex),
-      windDirection: ctx.request.body.windDirection,
-      windSpeed: parseFloat(ctx.request.body.windSpeed),
+      batteryPercent: parseFloat(body.batteryPercent),
+      batteryVoltage: parseFloat(body.batteryVoltage),
+      clientName: body.clientName,
+      clientVersion: body.clientVersion,
+      dewPoint: parseFloat(body.dewPoint),
+      externalTemp: parseFloat(body.externalTemp),
+      heatIndex: parseFloat(body.heatIndex),
+      humidity: parseFloat(body.humidity),
+      internalTemp: parseFloat(body.internalTemp),
+      lux: parseFloat(body.lux),
+      rainfall: parseFloat(body.rainfall),
+      recordedAt: new Date(body.recordedAt),
+      solarVoltage: parseFloat(body.solarVoltage),
+      uva: parseFloat(body.uva),
+      uvb: parseFloat(body.uvb),
+      uvIndex: parseFloat(body.uvIndex),
+      windDirection: body.windDirection,
+      windSpeed: parseFloat(body.windSpeed),
     }
 
     return next();
@@ -76,17 +77,15 @@ async function validationMiddleware(ctx: ParameterizedContext<PostReadingMiddlew
  * @param ctx
  * @param next
  */
-async function postReadingMiddleware(ctx: ParameterizedContext<PostReadingMiddlewareCtxState, IRouterParamContext & AppContext, PostReadingResponseBody>, next: Next) {
+async function postReadingMiddleware(ctx: ParameterizedContext<PostReadingMiddlewareCtxState, IRouterParamContext & AppContext>, next: Next) {
   try {
     const { pushSensorReadingQueue } = ctx;
     const { sensorReading } = ctx.state;
 
     const job = await createSensorReading(pushSensorReadingQueue, sensorReading);
 
-    // ctx.body = { id: job.id };
-    // ctx.status = 201;
-
-    ctx.body.test = true;
+    ctx.body = { id: job.id };
+    ctx.status = 201;
 
     return next();
   } catch (error) {

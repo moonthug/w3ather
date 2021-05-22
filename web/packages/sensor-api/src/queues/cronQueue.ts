@@ -1,8 +1,8 @@
 import Bull, { DoneCallback, Job } from 'bull';
 import { QueueOptions } from './QueueOptions';
 
-import { pushExternalReading } from './tasks/pushExternalReading';
-import { Task } from './tasks/Task';
+import { fetchAndPushExternalReading } from './cron-tasks/fetchAndPushExternalReading';
+import { CronTask } from './cron-tasks/CronTask';
 
 interface CronJobData {
   name: string;
@@ -19,8 +19,8 @@ export function createQueue(options: CreateQueueOptions) {
     prefix: options.prefix
   });
 
-  const tasks = [pushExternalReading];
-  const taskMap = new Map<string, Task>(tasks.map(task => [task.name, task]))
+  const tasks = [fetchAndPushExternalReading];
+  const taskMap = new Map<string, CronTask>(tasks.map(task => [task.name, task]))
 
   tasks.forEach(task => queue.add({ name: task.name }, { repeat: { cron: task.cron } }))
 

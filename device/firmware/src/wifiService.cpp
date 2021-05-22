@@ -17,8 +17,12 @@ void WifiService::begin(const char* wifiSsid, const char* wifiPassword) {
 
   Logger::info("Wifi connected");
 
-//  Serial.println("main: Fetch Time");
-//  configTime(0, 0, ntpServer);
-//  setenv("TZ", timezoneInfo, 1);
-//  tzset();
+  Logger::info("Fetch time...");
+
+  const char* ntpServer = "uk.pool.ntp.org";
+  const char* timezoneInfo = "GMT+0BST-1,M3.5.0/01:00:00,M10.5.0/02:00:00";
+
+  configTime(0, 0, ntpServer);
+  setenv("TZ", timezoneInfo, 1);
+  tzset();
 }

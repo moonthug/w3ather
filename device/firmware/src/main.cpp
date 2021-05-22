@@ -1,3 +1,6 @@
+#define DEVICE_NAME "branston_1"
+#define HW_VERSION "0.1"
+
 #include <Arduino.h>
 #include <Wire.h>
 
@@ -44,19 +47,24 @@ void loop() {
   uvSensor.loop();
 
   SensorReading sensorReading;
-  sensorReading.batteryVoltage = "";
-  sensorReading.externalTemp = "";
-  sensorReading.humidity = "";
-  sensorReading.internalTemp = "";
-  sensorReading.lux = "";
-  sensorReading.rainfall = "";
+  sensorReading.batteryPercent = 100;
+  sensorReading.batteryVoltage = 4.2;
+  sensorReading.dewPoint = 1;
+  sensorReading.externalTemp = 20;
+  sensorReading.heatIndex = 1;
+  sensorReading.humidity = 80;
+  sensorReading.internalTemp = 20;
+  sensorReading.lux = 30;
+  sensorReading.rainfall = 0;
   sensorReading.recordedAt = "";
-  sensorReading.solarVoltage = "";
-  sensorReading.uva = "";
-  sensorReading.uvb = "";
-  sensorReading.uvIndex = "";
-  sensorReading.windDirection = "";
-  sensorReading.windSpeed = "";
+  sensorReading.solarVoltage = 7;
+  sensorReading.uva = 1;
+  sensorReading.uvb = 1;
+  sensorReading.uvIndex = 1;
+  sensorReading.windDirection = "NE";
+  sensorReading.windSpeed = 0;
+  sensorReading.clientName = DEVICE_NAME;
+  sensorReading.clientVersion = HW_VERSION;
 
   sensorAPIService.postSensorReading(sensorReading);
 

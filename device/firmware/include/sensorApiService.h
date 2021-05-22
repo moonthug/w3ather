@@ -1,7 +1,9 @@
 #ifndef W3ATHER_SENSOR_API_SERVICE_H
 #define W3ATHER_SENSOR_API_SERVICE_H
 
+#include <time.h>
 #include "HTTPClient.h"
+#include <ArduinoJson.h>
 
 #include "logger.h"
 #include "sensor.h"
@@ -10,7 +12,7 @@
 class SensorAPIService {
 private:
   const char* apiUrl;
-  int post(const char* path);
+  int post(const char* path, String body);
 
 public:
   void begin(WifiService &wifiService, const char* apiUrl);

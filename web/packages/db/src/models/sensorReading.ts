@@ -4,6 +4,8 @@ export interface SensorReading {
   _id: string,
   batteryPercent: number,
   batteryVoltage: number,
+  clientName: string,
+  clientVersion: string,
   createdAt: Date,
   dewPoint: number,
   externalTemp: number,
@@ -27,6 +29,8 @@ export type SensorReadingModel = SensorReading & Document;
 const sensorReadingSchema = new Schema({
   batteryPercent: Number,
   batteryVoltage: Number,
+  clientName: String,
+  clientVersion: String,
   dewPoint: Number,
   externalTemp: Number,
   heatIndex: Number,

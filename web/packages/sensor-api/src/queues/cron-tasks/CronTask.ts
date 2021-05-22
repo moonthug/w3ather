@@ -1,6 +1,6 @@
 import { DoneCallback, Job } from 'bull';
 
-export interface Task {
+export interface CronTask {
   name: string;
   cron: string;
   dependencies?: string[];
