@@ -1,6 +1,6 @@
 {
   "name": "@h0me/w3ather-db",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "description": "",
   "main": "dist/index.js",
   "private": false,
