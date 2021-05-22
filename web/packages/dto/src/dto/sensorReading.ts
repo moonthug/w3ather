@@ -1,6 +1,8 @@
 export interface SensorReadingResponse {
   batteryPercent: number,
   batteryVoltage: number,
+  clientName: string,
+  clientVersion: string,
   createdAt: Date,
   dewPoint: number,
   externalTemp: number,
