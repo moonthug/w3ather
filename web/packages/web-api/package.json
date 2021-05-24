@@ -42,7 +42,7 @@
   },
   "dependencies": {
     "@h0me/w3ather-db": "^0.0.7",
-    "@h0me/w3ather-dto": "^0.0.1",
+    "@h0me/w3ather-dto": "^0.0.3",
     "pino": "^6.11.2",
     "typescript": "^4.2.4"
   }

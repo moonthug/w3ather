@@ -1,11 +1,11 @@
 #ifndef W3ATHER_SENSOR_API_SERVICE_H
 #define W3ATHER_SENSOR_API_SERVICE_H
 
+#include "esp_log.h"
 #include <time.h>
 #include "HTTPClient.h"
 #include <ArduinoJson.h>
 
-#include "logger.h"
 #include "sensor.h"
 #include "wifiService.h"
 

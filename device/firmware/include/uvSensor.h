@@ -1,6 +1,7 @@
 #ifndef W3ATHER_VEML6075_SENSOR
 #define W3ATHER_VEML6075_SENSOR
 
+#include "esp_log.h"
 #include "Wire.h"
 #include "Adafruit_VEML6075.h"
 
@@ -11,8 +12,12 @@ private:
   Adafruit_VEML6075 sensor;
 
 public:
+  float uva;
+  float uvb;
+  float uvIndex;
+
   void begin(TwoWire &wire);
-  void loop();
+  bool read();
 };
 
 

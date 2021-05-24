@@ -1,22 +1,22 @@
 #define DEVICE_NAME "branston_1"
 #define HW_VERSION "0.1"
+#define SLEEP_DURATION 15
 
-#include <Arduino.h>
-#include <Wire.h>
+#define LOG_LOCAL_LEVEL ESP_LOG_VERBOSE
+
+#include "Arduino.h"
+#include "Wire.h"
+#include "esp_log.h"
 
 #include "config.h"
 
-#include "logger.h"
 #include "sensorApiService.h"
 #include "wifiService.h"
 #include "luxSensor.h"
-#include "multiSensonr.h"
+#include "multiSensor.h"
 #include "uvSensor.h"
 
-// VEML6075 (UV Sensor) @ 0x10
-// BH1750 (Light Sensor) @ 0x23
-// SI1145 (UV Sensor) @ 0x60 <-- DONT USE!
-// BME680 () @ 0x76
+RTC_DATA_ATTR int bootCount = 0;
 
 WifiService wifiService;
 SensorAPIService sensorAPIService;
@@ -28,7 +28,8 @@ void setup() {
   Serial.begin(115200);
   while (!Serial);
 
-  Logger::info("test");
+  ++bootCount;
+  ESP_LOGI("main", "Boot %i", bootCount);
 
   Wire.begin();
 
@@ -38,10 +39,9 @@ void setup() {
   luxSensor.begin(Wire);
   multiSensor.begin(Wire);
   uvSensor.begin(Wire);
-}
 
+  esp_sleep_enable_timer_wakeup(SLEEP_DURATION * 1000000);
 
-void loop() {
   luxSensor.loop();
   multiSensor.loop();
   uvSensor.loop();
@@ -52,15 +52,14 @@ void loop() {
   sensorReading.dewPoint = 1;
   sensorReading.externalTemp = 20;
   sensorReading.heatIndex = 1;
-  sensorReading.humidity = 80;
-  sensorReading.internalTemp = 20;
-  sensorReading.lux = 30;
+  sensorReading.humidity = multiSensor.humidity;
+  sensorReading.internalTemp = multiSensor.temperature;
+  sensorReading.lux = luxSensor.lux;
   sensorReading.rainfall = 0;
-  sensorReading.recordedAt = "";
   sensorReading.solarVoltage = 7;
-  sensorReading.uva = 1;
-  sensorReading.uvb = 1;
-  sensorReading.uvIndex = 1;
+  sensorReading.uva = uvSensor.uva;
+  sensorReading.uvb = uvSensor.uvb;
+  sensorReading.uvIndex = uvSensor.uvIndex;
   sensorReading.windDirection = "NE";
   sensorReading.windSpeed = 0;
   sensorReading.clientName = DEVICE_NAME;
@@ -68,5 +67,11 @@ void loop() {
 
   sensorAPIService.postSensorReading(sensorReading);
 
-  delay(5000);
+  ESP_LOGI("main", "Sleep");
+  esp_deep_sleep_start();
+}
+
+
+void loop() {
+
 }

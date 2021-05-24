@@ -1,5 +1,5 @@
-#ifndef W3ATHER_MULTISENSONR_H
-#define W3ATHER_MULTISENSONR_H
+#ifndef W3ATHER_MULTISENSOR_H
+#define W3ATHER_MULTISENSOR_H
 
 #include "Wire.h"
 #include "bsec.h"
@@ -11,12 +11,18 @@
 class MultiSensor: public Sensor {
 private:
   Bsec sensor;
-
   void checkIaqSensorStatus();
+
 public:
+  float rawTemperature;
+  float temperature;
+  float rawHumidity;
+  float humidity;
+  float pressure;
+
   void begin(TwoWire &wire);
-  void loop();
+  bool read();
 };
 
 
-#endif //W3ATHER_MULTISENSONR_H
+#endif //W3ATHER_MULTISENSOR_H

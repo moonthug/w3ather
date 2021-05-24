@@ -1,8 +1,7 @@
-#include "multiSensonr.h"
+#include "multiSensor.h"
 
 void MultiSensor::begin(TwoWire &wire) {
   sensor.begin(BME680_I2C_ADDR_PRIMARY, wire);
-  Serial.println("SEC library version " + String(sensor.version.major) + "." + String(sensor.version.minor) + "." + String(sensor.version.major_bugfix) + "." + String(sensor.version.minor_bugfix));
   checkIaqSensorStatus();
 
   bsec_virtual_sensor_t sensorList[10] = {
@@ -21,39 +20,44 @@ void MultiSensor::begin(TwoWire &wire) {
   sensor.updateSubscription(sensorList, 10, BSEC_SAMPLE_RATE_LP);
 }
 
-void MultiSensor::checkIaqSensorStatus()  {
+bool MultiSensor::checkIaqSensorStatus()  {
+  bool ok = true;
+
   if (sensor.status != BSEC_OK) {
-    if (sensor.status < BSEC_OK) {
-      Serial.println("BSEC error code : " + String(sensor.status));
-    } else {
-      Serial.println("BSEC warning code : " + String(sensor.status));
-    }
+    sensor.status < BSEC_OK
+      ? ESP_LOG("BSEC error code: %s", sensor.status)
+      : ESP_LOG("BSEC warning code: %s", sensor.status);
+
+    ok = false;
   }
 
   if (sensor.bme680Status != BME680_OK) {
-    if (sensor.bme680Status < BME680_OK) {
-      Serial.println("BME680 error code : " + String(sensor.bme680Status));
-    } else {
-      Serial.println("BME680 warning code : " + String(sensor.bme680Status));
-    }
+    sensor.bme680Status < BME680_OK
+    ? ESP_LOG("BME680 error code: %s", sensor.bme680Status)
+    : ESP_LOG("BME680 warning code: %s", sensor.bme680Status);
+
+    return false;
   }
+
+  return ok;
 }
 
-void MultiSensor::loop() {
-  unsigned long time_trigger = millis();
-  if (sensor.run()) { // If new data is available
-    Serial.print(String(time_trigger));
-    Serial.print(", " + String(sensor.rawTemperature));
-    Serial.print(", " + String(sensor.pressure));
-    Serial.print(", " + String(sensor.rawHumidity));
-    Serial.print(", " + String(sensor.gasResistance));
-    Serial.print(", " + String(sensor.iaq));
-    Serial.print(", " + String(sensor.iaqAccuracy));
-    Serial.print(", " + String(sensor.temperature));
-    Serial.print(", " + String(sensor.humidity));
-    Serial.print(", " + String(sensor.staticIaq));
-    Serial.print(", " + String(sensor.co2Equivalent));
-    Serial.println(", " + String(sensor.breathVocEquivalent));
-    checkIaqSensorStatus();
+bool MultiSensor::read() {
+  if (sensor.run() && checkIaqSensorStatus()) {
+    ESP_LOGD("multi_sensor", "rawTemperature: %f", sensor.rawTemperature);
+    ESP_LOGD("multi_sensor", "temperature: %f", sensor.temperature);
+    ESP_LOGD("multi_sensor", "rawHumidity: %f", sensor.rawHumidity);
+    ESP_LOGD("multi_sensor", "humidity %f", sensor.humidity);
+    ESP_LOGD("multi_sensor", "pressure: %f", sensor.pressure);
+
+    rawTemperature = sensor.rawTemperature;
+    temperature = sensor.temperature;
+    rawHumidity = sensor.rawHumidity;
+    humidity = sensor.humidity;
+    pressure = sensor.pressure;
+
+    return true;
   }
+
+  return false;
 }

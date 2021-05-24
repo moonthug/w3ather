@@ -24,4 +24,4 @@ export async function createDbClient(uri: string, logger: LoggerLike = console, 
     logger.error(error);
     throw error;
   }
-};
+}

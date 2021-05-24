@@ -13,6 +13,7 @@ export interface SensorReading {
   humidity: number,
   internalTemp: number,
   lux: number,
+  pressure: number;
   rainfall: number,
   recordedAt: Date,
   solarVoltage: number,
@@ -37,6 +38,7 @@ const sensorReadingSchema = new Schema({
   humidity: Number,
   internalTemp: Number,
   lux: Number,
+  pressure: Number,
   rainfall: Number,
   recordedAt: { index: true, unique: true, type: Date },
   solarVoltage: Number,

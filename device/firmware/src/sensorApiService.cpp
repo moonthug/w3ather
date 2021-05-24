@@ -11,31 +11,26 @@ int SensorAPIService::post(const char* path, String body) {
   strcpy(url, this->apiUrl);
   strcat(url, path);
 
-  Logger::debug("Fetch url");
-  Logger::debug(url);
+  ESP_LOGD("sensor_api_service", "Fetch url: %s", url);
 
   http.begin(url);
   http.addHeader("Content-Type", "application/json");
   int httpResponseCode = http.POST(body);
 
   if (httpResponseCode >= 200 && httpResponseCode < 300 ) {
-    Logger::info("Request succeeded");
+    ESP_LOGI("sensor_api_service", "Request succeeded: %i", httpResponseCode);
+
     return true;
   }
 
-  char httpResponseCodeStr[3];
-  itoa(httpResponseCode, httpResponseCodeStr, 10);
-
-  Logger::error("Request failed:");
-  Logger::error(httpResponseCodeStr);
-
+  ESP_LOGE("sensor_api_service", "Request failed: %i", httpResponseCode);
   return false;
 }
 
 bool SensorAPIService::postSensorReading(SensorReading sensorReading) {
   struct tm timeinfo;
   if(!getLocalTime(&timeinfo)){
-    Logger::error("Failed to obtain time");
+    ESP_LOGE("sensor_api_service", "Failed to obtain time");
     return false;
   }
 

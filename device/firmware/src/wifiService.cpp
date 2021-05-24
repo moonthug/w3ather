@@ -8,18 +8,17 @@ void WifiService::begin(const char* wifiSsid, const char* wifiPassword) {
   WiFi.begin(wifiSsid, wifiPassword);
   WiFi.setHostname("w3ather");
 
-  Logger::info("Connect to Wifi...");
+  ESP_LOGI("wifi_service", "Connect to Wifi...");
 
   while (WiFi.status() != WL_CONNECTED) {
     delay(2000);
-    Logger::warn("Wifi connecting...");
+    ESP_LOGW("wifi_service", "Wifi connecting...");
   }
 
-  Logger::info("Wifi connected");
+  ESP_LOGI("wifi_service", "Wifi connected");
 
-  Logger::info("Fetch time...");
-
-  const char* ntpServer = "uk.pool.ntp.org";
+  ESP_LOGI("wifi_service", "Fetch time...");
+  const char* ntpServer = "192.168.1.50";
   const char* timezoneInfo = "GMT+0BST-1,M3.5.0/01:00:00,M10.5.0/02:00:00";
 
   configTime(0, 0, ntpServer);

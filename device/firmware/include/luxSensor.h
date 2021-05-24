@@ -1,6 +1,8 @@
 #ifndef W3ATHER_LUXSENSOR_H
 #define W3ATHER_LUXSENSOR_H
 
+
+#include "esp_log.h"
 #include "Wire.h"
 #include "BH1750.h"
 
@@ -12,7 +14,9 @@ private:
 
 public:
   void begin(TwoWire &wire);
-  void loop();
+  bool read();
+
+  float lux;
 };
 
 #endif //W3ATHER_LUXSENSOR_H

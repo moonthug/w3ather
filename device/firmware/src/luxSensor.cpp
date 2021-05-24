@@ -1,12 +1,13 @@
 #include "luxSensor.h"
 
 void LuxSensor::begin(TwoWire &wire) {
-  sensor.begin();
+  if (!sensor.begin()) {
+    ESP_LOGE("lux_sensor", "BH1750 sensor not found");
+  }
 }
 
-void LuxSensor::loop() {
-  float lux = sensor.readLightLevel();
-  Serial.print("Light: ");
-  Serial.print(lux);
-  Serial.println(" lx");
+bool LuxSensor::read() {
+  lux = sensor.readLightLevel();
+  ESP_LOGD("lux_sensor", "Light: %f", lux);
+  return true;
 }

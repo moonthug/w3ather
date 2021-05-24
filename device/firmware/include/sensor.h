@@ -27,7 +27,8 @@ struct SensorReading {
 
 class Sensor {
 public:
- virtual void begin(TwoWire &wire);
+  virtual void begin(TwoWire &wire);
+  virtual bool read();
 };
 
 #endif //W3ATHER_SENSOR_H

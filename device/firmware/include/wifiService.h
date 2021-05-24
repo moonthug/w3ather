@@ -1,9 +1,8 @@
 #ifndef W3ATHER_WIFISERVICE_H
 #define W3ATHER_WIFISERVICE_H
 
+#include "esp_log.h"
 #include <WiFi.h>
-
-#include "logger.h"
 
 class WifiService {
 public:
