@@ -3,7 +3,8 @@
 #
 # Base Node
 FROM mhart/alpine-node:12 AS base
-RUN apk add --no-cache tini
+RUN apk update
+RUN apk add --no-cache tini jq
 WORKDIR /opt/app
 ENTRYPOINT ["/sbin/tini", "--"]
 COPY ./packages/sensor-api/package*.json ./
@@ -31,7 +32,6 @@ FROM base AS build
 COPY --from=global_dependencies /opt/app/node_modules ./node_modules
 COPY --from=local_dependencies /opt/app/node_modules ./node_modules
 COPY ./packages/sensor-api .
-# yuk
 COPY ./tsconfig.json /
 RUN npm run build
 

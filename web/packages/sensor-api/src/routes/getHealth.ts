@@ -7,8 +7,8 @@ interface Response {
 }
 
 export async function getHealthMiddleware(ctx: ParameterizedContext<any, IRouterParamContext & AppContext>, next: Next) {
-
   ctx.body = {
+    version: process.env.npm_package_version,
     cronQueue: {
       complete: await ctx.cronQueue.getCompletedCount(),
       failed: await ctx.cronQueue.getFailedCount()
