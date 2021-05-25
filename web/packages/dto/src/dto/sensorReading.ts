@@ -1,4 +1,5 @@
 export interface SensorReadingResponse {
+  _id: string,
   batteryPercent: number,
   batteryVoltage: number,
   clientName: string,
@@ -10,8 +11,10 @@ export interface SensorReadingResponse {
   humidity: number,
   internalTemp: number,
   lux: number,
+  pressure: number;
   rainfall: number,
   recordedAt: Date,
+  solarPercent: number,
   solarVoltage: number,
   updatedAt: Date,
   uva: number,

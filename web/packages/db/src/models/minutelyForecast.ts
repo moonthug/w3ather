@@ -16,7 +16,8 @@ const minutelyForecastSchema = new Schema({
   recordedAt: { index: true, unique: true, type: Date },
   precipVolume: Number,
 }, {
-  timestamps: true
+  timestamps: true,
+  versionKey: false
 });
 
 export const minutelyForecastModel = model<MinutelyForecastModel>(

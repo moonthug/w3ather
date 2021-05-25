@@ -87,7 +87,8 @@ const dailyForecastSchema = new Schema({
     }
   ]
 }, {
-  timestamps: true
+  timestamps: true,
+  versionKey: false
 });
 
 export const dailyForecastModel = model<DailyForecastModel>(

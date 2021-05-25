@@ -1,6 +1,7 @@
 #ifndef W3ATHER_SENSOR_H
 #define W3ATHER_SENSOR_H
 
+#include "OneWire.h"
 #include "Wire.h"
 
 struct SensorReading {
@@ -39,13 +40,21 @@ public:
  *
  */
 class AnalogSensor: public Sensor {
-private:
+protected:
   gpio_num_t sensorPin;
 
 public:
   void begin(gpio_num_t pin) {
     sensorPin = pin;
   }
+};
+
+/**
+ *
+ */
+class OneWireSensor: public Sensor {
+public:
+  virtual void begin(OneWire &wire);
 };
 
 /**

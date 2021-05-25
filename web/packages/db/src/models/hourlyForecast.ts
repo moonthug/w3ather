@@ -59,7 +59,8 @@ const hourlyForecastSchema = new Schema({
     }
   ]
 }, {
-  timestamps: true
+  timestamps: true,
+  versionKey: false
 });
 
 export const hourlyForecastModel = model<HourlyForecastModel>(

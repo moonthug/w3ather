@@ -1,6 +1,9 @@
 #ifndef W3ATHER_BATTERYSENSOR_H
 #define W3ATHER_BATTERYSENSOR_H
 
+#define BATTERY_VOLTAGE 4.2
+
+#include "Arduino.h"
 #include "esp_log.h"
 
 #include "sensor.h"
