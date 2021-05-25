@@ -8,7 +8,7 @@ function reduceDailyWeatherForecast(dailyForecast: DailyForecastModel): DailyFor
   return {
     createdAt: dailyForecast.createdAt,
     updatedAt: dailyForecast.updatedAt,
-    // source: dailyForecast.source,
+    source: dailyForecast.source,
     recordedAt: dailyForecast.recordedAt,
     sunrise: dailyForecast.sunrise,
     sunset: dailyForecast.sunset,

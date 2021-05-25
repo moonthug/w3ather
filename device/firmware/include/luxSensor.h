@@ -8,7 +8,7 @@
 
 #include "sensor.h"
 
-class LuxSensor: public Sensor {
+class LuxSensor: public I2CSensor {
 private:
   BH1750 sensor;
 

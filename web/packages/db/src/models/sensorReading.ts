@@ -16,6 +16,7 @@ export interface SensorReading {
   pressure: number;
   rainfall: number,
   recordedAt: Date,
+  solarPercent: number,
   solarVoltage: number,
   updatedAt: Date,
   uva: number,
@@ -41,6 +42,7 @@ const sensorReadingSchema = new Schema({
   pressure: Number,
   rainfall: Number,
   recordedAt: { index: true, unique: true, type: Date },
+  solarPercent: Number,
   solarVoltage: Number,
   uva: Number,
   uvb: Number,

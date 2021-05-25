@@ -12,12 +12,14 @@ struct SensorReading {
   float humidity;
   float internalTemp;
   float lux;
+  float pressure;
   float rainfall;
   const char* recordedAt;
+  float solarPercent;
   float solarVoltage;
   float uva;
   float uvb;
-  int uvIndex;
+  float uvIndex;
   const char* windDirection;
   float windSpeed;
 
@@ -25,10 +27,33 @@ struct SensorReading {
   const char* clientVersion;
 };
 
+/**
+ *
+ */
 class Sensor {
 public:
-  virtual void begin(TwoWire &wire);
   virtual bool read();
+};
+
+/**
+ *
+ */
+class AnalogSensor: public Sensor {
+private:
+  gpio_num_t sensorPin;
+
+public:
+  void begin(gpio_num_t pin) {
+    sensorPin = pin;
+  }
+};
+
+/**
+ *
+ */
+class I2CSensor: public Sensor {
+public:
+  virtual void begin(TwoWire &wire);
 };
 
 #endif //W3ATHER_SENSOR_H

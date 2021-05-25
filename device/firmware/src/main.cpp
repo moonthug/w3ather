@@ -12,6 +12,7 @@
 
 #include "sensorApiService.h"
 #include "wifiService.h"
+#include "batterySensor.h"
 #include "luxSensor.h"
 #include "multiSensor.h"
 #include "uvSensor.h"
@@ -20,6 +21,7 @@ RTC_DATA_ATTR int bootCount = 0;
 
 WifiService wifiService;
 SensorAPIService sensorAPIService;
+BatterySensor batterySensor;
 LuxSensor luxSensor;
 MultiSensor multiSensor;
 UVSensor uvSensor;
@@ -36,26 +38,30 @@ void setup() {
   wifiService.begin(WIFI_SSID, WIFI_PASSWORD);
   sensorAPIService.begin(wifiService, SENSOR_API_URL);
 
+  batterySensor.begin(BATTERY_SENSOR_PIN);
+
   luxSensor.begin(Wire);
   multiSensor.begin(Wire);
   uvSensor.begin(Wire);
 
   esp_sleep_enable_timer_wakeup(SLEEP_DURATION * 1000000);
 
-  luxSensor.loop();
-  multiSensor.loop();
-  uvSensor.loop();
+  luxSensor.read() ? : ESP_LOGI("main", "Lux sensor read failed");
+  multiSensor.read() ? : ESP_LOGI("main", "Lux sensor read failed");
+  uvSensor.read() ? : ESP_LOGI("main", "Lux sensor read failed");
 
   SensorReading sensorReading;
-  sensorReading.batteryPercent = 100;
-  sensorReading.batteryVoltage = 4.2;
+  sensorReading.batteryPercent = batterySensor.batteryPercent;
+  sensorReading.batteryVoltage = batterySensor.batteryVoltage;
   sensorReading.dewPoint = 1;
   sensorReading.externalTemp = 20;
   sensorReading.heatIndex = 1;
   sensorReading.humidity = multiSensor.humidity;
   sensorReading.internalTemp = multiSensor.temperature;
   sensorReading.lux = luxSensor.lux;
+  sensorReading.pressure = multiSensor.pressure;
   sensorReading.rainfall = 0;
+  sensorReading.solarPercent = 7;
   sensorReading.solarVoltage = 7;
   sensorReading.uva = uvSensor.uva;
   sensorReading.uvb = uvSensor.uvb;

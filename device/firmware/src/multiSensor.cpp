@@ -4,37 +4,36 @@ void MultiSensor::begin(TwoWire &wire) {
   sensor.begin(BME680_I2C_ADDR_PRIMARY, wire);
   checkIaqSensorStatus();
 
-  bsec_virtual_sensor_t sensorList[10] = {
+  bsec_virtual_sensor_t sensorList[5] = {
       BSEC_OUTPUT_RAW_TEMPERATURE,
       BSEC_OUTPUT_RAW_PRESSURE,
       BSEC_OUTPUT_RAW_HUMIDITY,
-      BSEC_OUTPUT_RAW_GAS,
-      BSEC_OUTPUT_IAQ,
-      BSEC_OUTPUT_STATIC_IAQ,
-      BSEC_OUTPUT_CO2_EQUIVALENT,
-      BSEC_OUTPUT_BREATH_VOC_EQUIVALENT,
       BSEC_OUTPUT_SENSOR_HEAT_COMPENSATED_TEMPERATURE,
       BSEC_OUTPUT_SENSOR_HEAT_COMPENSATED_HUMIDITY,
   };
 
-  sensor.updateSubscription(sensorList, 10, BSEC_SAMPLE_RATE_LP);
+  sensor.updateSubscription(sensorList, 5, BSEC_SAMPLE_RATE_LP);
 }
 
-bool MultiSensor::checkIaqSensorStatus()  {
+bool MultiSensor::checkIaqSensorStatus() {
   bool ok = true;
 
   if (sensor.status != BSEC_OK) {
-    sensor.status < BSEC_OK
-      ? ESP_LOG("BSEC error code: %s", sensor.status)
-      : ESP_LOG("BSEC warning code: %s", sensor.status);
+    if (sensor.status < BSEC_OK) {
+      ESP_LOGE("multi_sensor", "BSEC error code: %s", sensor.status);
+    } else {
+      ESP_LOGW("multi_sensor", "BSEC warning code: %s", sensor.status);
+    }
 
     ok = false;
   }
 
   if (sensor.bme680Status != BME680_OK) {
-    sensor.bme680Status < BME680_OK
-    ? ESP_LOG("BME680 error code: %s", sensor.bme680Status)
-    : ESP_LOG("BME680 warning code: %s", sensor.bme680Status);
+    if (sensor.bme680Status < BME680_OK) {
+      ESP_LOGE("multi_sensor", "BME680 error code: %s", sensor.bme680Status);
+    } else {
+      ESP_LOGW("multi_sensor", "BME680 warning code: %s", sensor.bme680Status);
+    }
 
     return false;
   }

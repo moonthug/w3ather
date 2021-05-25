@@ -8,10 +8,10 @@
 
 #define SEALEVELPRESSURE_HPA (1013.25)
 
-class MultiSensor: public Sensor {
+class MultiSensor: public I2CSensor {
 private:
   Bsec sensor;
-  void checkIaqSensorStatus();
+  bool checkIaqSensorStatus();
 
 public:
   float rawTemperature;

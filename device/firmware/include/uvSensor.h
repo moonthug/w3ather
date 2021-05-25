@@ -7,7 +7,7 @@
 
 #include "sensor.h"
 
-class UVSensor: public Sensor {
+class UVSensor: public I2CSensor {
 private:
   Adafruit_VEML6075 sensor;
 

@@ -48,7 +48,9 @@ bool SensorAPIService::postSensorReading(SensorReading sensorReading) {
   doc["humidity"] = sensorReading.humidity;
   doc["internalTemp"] = sensorReading.internalTemp;
   doc["lux"] = sensorReading.lux;
+  doc["pressure"] = sensorReading.pressure;
   doc["rainfall"] = sensorReading.rainfall;
+  doc["solarPercent"] = sensorReading.solarPercent;
   doc["solarVoltage"] = sensorReading.solarVoltage;
   doc["uva"] = sensorReading.uva;
   doc["uvb"] = sensorReading.uvb;
